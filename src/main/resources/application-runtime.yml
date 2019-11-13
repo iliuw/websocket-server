@@ -1,0 +1,19 @@
+sysconf:
+  socketio:
+    upgrade-timeout: 100000
+    ping-interval: 60000
+    ping-timeout: 30000
+    max-idle: 500
+    max-session: 500
+    idle-id-prefix: wsClientID
+    session-id-prefix: wsSessionID
+    max-frame-payload-length: 1048000
+    max-http-content-length: 1048000
+    boss-count: 1
+    work-count: 100
+    allow-custom-requests: true
+  thread-pool:
+    core-idle: 6
+    max-idle: 6
+    keep-alive: 0
+    capacity: 1024

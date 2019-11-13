@@ -1,0 +1,169 @@
+buildscript {
+    repositories {
+        maven {url 'https://maven.aliyun.com/repository/public/'}
+        maven {url 'https://jitpack.io'}
+        maven {url 'https://plugins.gradle.org/m2/'}
+        mavenCentral()
+        jcenter()
+    }
+    dependencies {
+        classpath 'org.springframework.boot:spring-boot-gradle-plugin:'+ver_boot
+        classpath 'org.jsonschema2pojo:jsonschema2pojo-gradle-plugin:'+ver_jsonschema2pojo
+//        classpath 'gradle.plugin.com.arenagod.gradle:mybatis-generator-plugin:1.4'
+        classpath 'se.transmode.gradle:gradle-docker:1.2'
+    }
+}
+
+plugins {
+    id 'java'
+    id 'application'
+    id 'io.spring.dependency-management' version '1.0.8.RELEASE'
+    id 'com.palantir.git-version' version '0.5.3'
+    id 'com.github.johnrengelman.shadow' version '4.0.3'
+}
+
+group 'com.robby.app'
+version ver_product
+
+sourceCompatibility = ver_jdk
+targetCompatibility = ver_jdk
+
+[compileJava, compileTestJava].options*.encoding = 'UTF-8'
+
+apply plugin: 'java'
+apply plugin: 'application'
+apply plugin: 'org.springframework.boot'
+apply plugin: 'io.spring.dependency-management'
+apply plugin: 'com.github.johnrengelman.shadow'
+apply plugin: 'docker'
+
+repositories {
+    maven {url 'https://maven.aliyun.com/repository/public/'}
+//    maven {
+//        credentials {
+//            username 'jTxM5Q'
+//            password 'NyADxvU41p'
+//        }
+//        url 'https://repo.rdc.aliyun.com/repository/110277-release-pJbhlb/'
+//    }
+    maven {
+        credentials {
+            username 'jTxM5Q'
+            password 'NyADxvU41p'
+        }
+        url 'https://repo.rdc.aliyun.com/repository/110277-snapshot-Hge2lG/'
+    }
+    maven {url 'https://jitpack.io'}
+    maven {url 'https://plugins.gradle.org/m2/'}
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    // Spring & SpringBoot
+    compile 'org.springframework.boot:spring-boot-starter'
+    compile ('org.springframework.boot:spring-boot-starter-web') {
+        transitive = true
+        exclude module: 'spring-boot-starter-tomcat'
+    }
+    compile 'org.springframework.boot:spring-boot-starter-jetty'
+    compile 'org.springframework.boot:spring-boot-starter-actuator'
+    compile 'org.springframework.boot:spring-boot-starter-data-redis'
+    compile 'org.springframework.boot:spring-boot-starter-quartz'
+
+    compile 'org.aspectj:aspectjrt'
+
+    compile 'javax.servlet:javax.servlet-api:' + ver_servlet
+
+    // Druid
+    compile 'com.alibaba:druid-spring-boot-starter:' + ver_druid
+
+    // MyBatis
+    compile 'org.mybatis.spring.boot:mybatis-spring-boot-starter:' + ver_mybatis_spring
+    compile 'com.github.pagehelper:pagehelper:' + ver_pagehelper
+
+    // MyBatis-Plus
+    compile 'com.baomidou:mybatis-plus-boot-starter:' + ver_mybatis_plus
+    compile 'com.github.jneat:mybatis-types:' + ver_mybatis_types
+
+    // Validation
+    compile 'javax.validation:validation-api:' + ver_validation
+    compile 'org.hibernate.validator:hibernate-validator:' + ver_hibernate_validate
+
+    // Flywaydb
+    compile 'org.flywaydb:flyway-core:' + ver_flywaydb
+
+    // SpringBoot-devtools
+    runtime 'org.springframework.boot:spring-boot-devtools'
+
+    // Shiro
+    compile 'org.apache.shiro:shiro-spring-boot-starter:' + ver_shiro
+
+    // Lombok
+    compile 'org.projectlombok:lombok'
+//    annotationProcessor 'org.projectlombok:lombok'
+
+    // MySQL JDBC Driver
+    compile 'mysql:mysql-connector-java:' + ver_mysql
+
+    // Jackson
+    compile 'com.fasterxml.jackson.core:jackson-core:' + ver_jackson
+    compile 'com.fasterxml.jackson.core:jackson-databind:' + ver_jackson
+    compile 'com.fasterxml.jackson.core:jackson-annotations:' + ver_jackson
+    compile 'com.fasterxml.jackson.dataformat:jackson-dataformat-xml:' + ver_jackson
+
+    // Google
+    compile 'com.google.guava:guava:' + ver_guava
+    compile 'com.google.code.gson:gson:' + ver_gson
+
+    // Apache
+    compile 'org.apache.commons:commons-lang3:' + ver_lang3
+    compile 'org.apache.commons:commons-pool2:' + ver_pool2
+    compile 'org.apache.poi:poi:' + ver_poi
+    compile 'org.apache.poi:poi-ooxml:' + ver_poi
+
+    // Antlr
+    compile 'org.antlr:antlr4:' + ver_antlr
+    compile 'org.antlr:stringtemplate:' + ver_antlr_str
+
+    // redis
+    compile 'redis.clients:jedis:' + ver_jedis
+    compile 'org.hashids:hashids:' + ver_hashids
+
+    // Commons-fileupload
+    compile 'commons-fileupload:commons-fileupload:' + ver_fileupload
+    compile 'commons-io:commons-io:' + ver_io
+
+    // Slf4j
+    compile 'org.slf4j:slf4j-api:' + ver_slf4j
+
+    // Github-feign
+    compile 'io.github.openfeign:feign-core:' + ver_openfeign
+    compile 'io.github.openfeign:feign-gson:' + ver_openfeign
+    compile 'io.github.openfeign:feign-httpclient:' + ver_openfeign
+    compile 'io.github.openfeign:feign-okhttp:' + ver_openfeign
+
+    // Swagger2
+    compile 'io.springfox:springfox-swagger2:' + ver_swagger
+    compile 'io.springfox:springfox-swagger-ui:' + ver_swagger
+
+    // Netty-SocketIO
+    compile 'com.corundumstudio.socketio:netty-socketio:' + ver_socketio
+    compile 'org.eclipse.persistence:javax.persistence:' + ver_persistence
+
+    // Unit test
+    testCompile ('org.springframework.boot:spring-boot-starter-test') {
+        exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
+        exclude group: 'junit', module: 'junit'
+    }
+    testCompile 'junit:junit:' + ver_junit
+    testCompile 'org.mockito:mockito-all:' + ver_mockito
+
+    compile 'com.robby.app:Commons:' + ver_commons
+}
+
+mainClassName = "com.robby.app.wsserver.WsServerLauncher"
+
+jar {
+    manifest { attributes 'Main-Class': mainClassName}
+}

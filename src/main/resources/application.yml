@@ -1,0 +1,55 @@
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    shutdown:
+      enabled: true
+    sensitive:
+      enabled: false
+server:
+  ssl:
+    enabled: false
+  port: 9100
+  servlet:
+    context-path: /ws_server
+    application-display-name: 'Robby WebSocket Server'
+  jetty:
+    acceptors: 4
+    selectors: 4
+    max-http-post-size: 2048000
+    accesslog:
+      time-zone: Asia/Shanghai
+      enabled: true
+      append: true
+      file-date-format: yyyy-MM-dd HH:mm:SS
+      filename: robby-ws-server.access.log
+
+spring:
+  application:
+    name: WS-Server
+  profiles:
+    active: dev
+    include: runtime,doc
+  http:
+    converters:
+      preferred-json-mapper: gson
+  gson:
+    pretty-printing: true
+    date-format: yyyy-MM-dd HH:mm:SS
+    serialize-nulls: true
+    long-serialization-policy: default
+  jackson:
+    date-format: Asia/Shanghai
+
+mybatis-plus:
+  mapper-locations: classpath*:mapper/**/*.xml
+  config-location: classpath:config/mybatis-config.xml
+  type-aliases-package: com.robby.app.wsserver.pojo.entity
+  global-config:
+    db-config:
+      id-type: input
+      field-strategy: not_null
+#      key-generator:
+    sql-parser-cache: false

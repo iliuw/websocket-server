@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<configuration debug="false" scan="true" scanPeriod="10 seconds">
+    <include resource="org/springframework/boot/logging/logback/defaults.xml" />
+    <!--<property name="LOG_PATH" value="${logging.path:-${LOG_TEMP:-${java.io.tmpdir:-/var/log/robby}}}/ws-server}" />-->
+    <springProperty scopy="context" name="LOG_PATH" source="logging.path"/>
+    <include resource="org/springframework/boot/logging/logback/console-appender.xml" />
+    <contextName>yb-eureka</contextName>
+    <property name="maxHistory" value="30" />
+
+    <!-- DEBUG -->
+    <appender name="debug_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}.debug.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>DEBUG</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}.debug.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level | %-5thread| %-5logger{36} || [%-5file:%L:%C@%M] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- INFO -->
+    <appender name="info_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}.info.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>INFO</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}.info.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level | %-5thread| %-5logger{36} || [%-5file:%L:%C@%M] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- WARN -->
+    <appender name="warn_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}.warn.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>WARN</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}.warn.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level | %-5thread| %-5logger{36} || [%-5file:%L:%C@%M] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- ERROR -->
+    <appender name="error_file" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>${LOG_PATH}.error.log</file>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_PATH}.error.%d{yyyy-MM-dd}.log</fileNamePattern>
+            <maxHistory>${maxHistory}</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%date %level | %-5thread| %-5logger{36} || [%-5file:%L:%C@%M] - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="org.springframework.web" level="warn" />
+    <logger name="org.springboot.sample" level="error" />
+    <!-- 打印SQL -->
+    <logger name="com.jwkj.tt.api.synergy.mapper" level="debug" />
+    <logger name="com.jwkj.tt.api.synergy.pojo.entity" level="debug" />
+
+    <root level="debug">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="debug_file" />
+    </root>
+    <root level="info">
+        <appender-ref ref="info_file" />
+    </root>
+    <root level="warn">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="warn_file" />
+    </root>
+    <root level="error">
+        <appender-ref ref="CONSOLE" />
+        <appender-ref ref="error_file" />
+    </root>
+</configuration>

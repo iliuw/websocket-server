@@ -1,0 +1,9 @@
+swagger:
+  title: 'WebSocket-Server RESTful API Documents'
+  desc: 'Robby的WebSocket服务相关RESTful接口文档'
+  author: 'Robby'
+  email: 'liujava@qq.com'
+  version: ${VERSION:v0.1.0-SNAPSHOT}
+  domain: "http://${env.doc-host}:${server.port}/${server.servlet.context-path}/swagger-ui.html"
+  base-package: 'com.robby.app.wsserver.face'
+  path-mapper: '/'

@@ -1,0 +1,83 @@
+spring:
+  devtools:
+    restart:
+      enabled: true
+      additional-paths: src/main
+  datasource:
+    master:
+      url: jdbc:mysql://localhost:3306/robby_ws?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false
+      username: root
+      password: p@ssw0rd
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+    slaver:
+      url: jdbc:mysql://localhost:3306/robby_ws?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false
+      username: root
+      password: p@ssw0rd
+      driver-class-name: com.mysql.cj.jdbc.Driver
+      type: com.alibaba.druid.pool.DruidDataSource
+    druid:
+      initial-size: 20
+      max-idle: 8
+      max-active: 20
+      min-idle: 0
+      max-wait: 5000
+      time-between-eviction-runs-millis: 60000
+      min-evictable-idle-time-millis: 300000
+      validation-query: select 1
+      test-on-borrow: true
+      test-on-return: false
+      test-while-idle: true
+      pool-prepared-statements: true
+      max-pool-prepared-statement-per-connection-size: 20
+      filter: slf4j,state
+      connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+      debug: true
+      stat-view-servlet:
+        login-username: guest
+        login-password: guest
+        allow:
+        deny:
+  flyway:
+    baseline-on-migrate: true
+    table: schema_history
+    ignore-ignored-migrations: true
+    ignore-missing-migrations: true
+    ignore-pending-migrations: true
+    ignore-future-migrations: true
+  redis:
+    host: 'localhost'
+    port: 6379
+    password: 'p@ssw0rd'
+    timeout: 2000
+    jedis:
+      pool:
+        max-wait: 2ms
+        max-active: 8
+        max-idle: 8
+        min-idle: 0
+        max-wait-millis: 5000
+        test-on-borrow: true
+        test-on-return: false
+        test-while-idle: true
+        block-when-exhausted: true
+        time-between-eviction-runs-millis: 60000
+        min-evictable-idle-time-millis: 30000
+        num-tests-per-eviction-run: 1
+  socketio:
+    host: 'localhost' # 允许连接的地址
+    port: 9101
+
+logging:
+  level:
+    org.springframework: info
+    com.robby.app.wsserver: debug
+  config: classpath:config/logback-spring.xml
+  path: /var/log/robby
+  file:
+    max-history: 30
+    max-size: 10MB
+
+env:
+  stack-trace: true
+  doc-host: 'localhost'

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+
+    <settings>
+        <setting name="logImpl" value="STDOUT_LOGGING" />
+    </settings>
+    <typeHandlers>
+        <typeHandler handler="com.robby.app.wsserver.commons.datatype.handles.JsonTypeHandle" />
+    </typeHandlers>
+    <plugins>
+        <plugin interceptor="com.github.pagehelper.PageInterceptor">
+            <property name="supportMethodsArguments" value="true" />
+            <property name="params" value="pageNum=pageNo;pageSize=pageSize;" />
+        </plugin>
+    </plugins>
+
+</configuration>
