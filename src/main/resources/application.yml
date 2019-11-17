@@ -12,6 +12,7 @@ server:
   ssl:
     enabled: false
   port: 9100
+  ws-port: 9101
   servlet:
     context-path: /ws_server
     application-display-name: 'Robby WebSocket Server'
@@ -41,7 +42,8 @@ spring:
     serialize-nulls: true
     long-serialization-policy: default
   jackson:
-    date-format: Asia/Shanghai
+    date-format: yyyy-MM-dd HH:mm:SS
+    time-zone: Asia/Shanghai
 
 mybatis-plus:
   mapper-locations: classpath*:mapper/**/*.xml

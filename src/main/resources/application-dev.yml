@@ -10,7 +10,7 @@ spring:
       password: p@ssw0rd
       driver-class-name: com.mysql.cj.jdbc.Driver
       type: com.alibaba.druid.pool.DruidDataSource
-    slaver:
+    slaver: # 现在无用
       url: jdbc:mysql://localhost:3306/robby_ws?serverTimeZone=Asia/Shanghai&useUnicode=true&characterEncoding=utf8&allowMultiQueries=true&autoReconnect=true&useSSL=false
       username: root
       password: p@ssw0rd
@@ -30,7 +30,7 @@ spring:
       test-while-idle: true
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 20
-      filter: slf4j,state
+      filter: slf4j,stat
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       debug: true
       stat-view-servlet:
@@ -66,7 +66,6 @@ spring:
         num-tests-per-eviction-run: 1
   socketio:
     host: 'localhost' # 允许连接的地址
-    port: 9101
 
 logging:
   level:

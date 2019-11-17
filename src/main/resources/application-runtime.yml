@@ -17,3 +17,8 @@ sysconf:
     max-idle: 6
     keep-alive: 0
     capacity: 1024
+  cors-allow:
+    headers: 'Origin,Accept,Content-Type,X-requested-with,X-server-wsClientID,X-server-wsSessionID' # 允许跨域的header，直接加
+    origin: "*" # 允许跨域的请求路径
+    methods: "GET,POST,PUT,DELETE,OPTIONS" # 允许跨域的Request方法
+    power: "Jetty" # 跨域的中间件，Jetty,Tomcat

@@ -1,7 +1,5 @@
 package com.robby.app.wsserver;
 
-import com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure;
-import org.apache.shiro.spring.boot.autoconfigure.ShiroAutoConfiguration;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
@@ -11,7 +9,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
  *
  * @author liuwei
  */
-@SpringBootApplication(exclude = {DruidDataSourceAutoConfigure.class, ShiroAutoConfiguration.class})
+@SpringBootApplication(exclude = {
+        com.alibaba.druid.spring.boot.autoconfigure.DruidDataSourceAutoConfigure.class
+//        org.apache.shiro.spring.boot.autoconfigure.ShiroAutoConfiguration.class
+})
 @MapperScan(basePackages = {"com.robby.app.wsserver.mapper"})
 public class WsServerLauncher {
 

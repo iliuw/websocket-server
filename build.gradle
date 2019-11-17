@@ -1,6 +1,20 @@
 buildscript {
     repositories {
         maven {url 'https://maven.aliyun.com/repository/public/'}
+        maven {
+            credentials {
+                username 'jTxM5Q'
+                password 'NyADxvU41p'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/110277-release-pJbhlb/'
+        }
+        maven {
+            credentials {
+                username 'jTxM5Q'
+                password 'NyADxvU41p'
+            }
+            url 'https://repo.rdc.aliyun.com/repository/110277-snapshot-Hge2lG/'
+        }
         maven {url 'https://jitpack.io'}
         maven {url 'https://plugins.gradle.org/m2/'}
         mavenCentral()
@@ -39,13 +53,13 @@ apply plugin: 'docker'
 
 repositories {
     maven {url 'https://maven.aliyun.com/repository/public/'}
-//    maven {
-//        credentials {
-//            username 'jTxM5Q'
-//            password 'NyADxvU41p'
-//        }
-//        url 'https://repo.rdc.aliyun.com/repository/110277-release-pJbhlb/'
-//    }
+    maven {
+        credentials {
+            username 'jTxM5Q'
+            password 'NyADxvU41p'
+        }
+        url 'https://repo.rdc.aliyun.com/repository/110277-release-pJbhlb/'
+    }
     maven {
         credentials {
             username 'jTxM5Q'
@@ -97,7 +111,7 @@ dependencies {
     runtime 'org.springframework.boot:spring-boot-devtools'
 
     // Shiro
-    compile 'org.apache.shiro:shiro-spring-boot-starter:' + ver_shiro
+//    compile 'org.apache.shiro:shiro-spring-boot-starter:' + ver_shiro
 
     // Lombok
     compile 'org.projectlombok:lombok'

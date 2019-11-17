@@ -9,7 +9,7 @@
         <setting name="logImpl" value="STDOUT_LOGGING" />
     </settings>
     <typeHandlers>
-        <typeHandler handler="com.robby.app.wsserver.commons.datatype.handles.JsonTypeHandle" />
+        <typeHandler handler="com.robby.app.commons.datatype.handles.JsonTypeHandle" />
     </typeHandlers>
     <plugins>
         <plugin interceptor="com.github.pagehelper.PageInterceptor">

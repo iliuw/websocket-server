@@ -28,7 +28,7 @@ spring:
       test-while-idle: true
       pool-prepared-statements: true
       max-pool-prepared-statement-per-connection-size: 20
-      filter: slf4j, state
+      filter: slf4j, stat
       connection-properties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
       debug: true
       stat-view-servlet:
@@ -64,7 +64,6 @@ spring:
         num-tests-per-eviction-run: 1
   socketio:
     host: 'localhost' # 允许连接的地址
-    port: 9101
 
 logging:
   level:
