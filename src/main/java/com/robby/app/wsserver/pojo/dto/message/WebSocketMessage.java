@@ -1,4 +1,4 @@
-package com.robby.app.wsserver.pojo.dto;
+package com.robby.app.wsserver.pojo.dto.message;
 
 import java.util.function.Supplier;
 
